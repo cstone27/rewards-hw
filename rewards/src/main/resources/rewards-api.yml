@@ -1,0 +1,72 @@
+openapi: '3.0.2'
+info:
+  title: Rewards API
+  version: '1.0'
+servers:
+  - url: https://{environment}.example.com/v1/rewards
+    variables:
+      environment:
+        default: api
+        enum:
+          - api
+          - stage.api
+          - dev.api
+components:
+  schemas:
+    transaction:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        amount:
+          type: number
+          format: double
+    points:
+      type: object
+      properties:
+        date:
+          description: The date the points were earned.
+          type: string
+          format: date
+        amount:
+          type: integer
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-KEY
+      in: header
+paths:
+  /calculator:
+    post:
+      summary: Calculates and summarizes the points earned for a given set of transactions. 
+      tags:
+        - "Calculator"
+      operationId: calculatePoints
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/transaction'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  monthly:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/points'
+                  total:
+                    type: integer
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+security:
+  - ApiKeyAuth: []
