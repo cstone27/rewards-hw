@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>rewards</artifactId>
+	<artifactId>rewards-api</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>rewards</name>
 	<description>Demo rewards calculator service</description>
