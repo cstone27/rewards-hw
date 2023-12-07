@@ -31,11 +31,6 @@ components:
           format: date
         amount:
           type: integer
-  securitySchemes:
-    ApiKeyAuth:
-      type: apiKey
-      name: X-API-KEY
-      in: header
 paths:
   /calculator:
     post:
@@ -68,5 +63,3 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
-security:
-  - ApiKeyAuth: []
